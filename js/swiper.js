@@ -23,8 +23,12 @@ const locationLabels = [
 ];
 
 function imagePath(index) {
-  return `assets/images/img (${index}).jpeg`;
+  return `assets/images/img (${index}).webp`;
 }
+
+const BLANK_IMG =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+let lazyImageObserver = null;
 
 function buildSectionData() {
   const sections = [];
@@ -64,11 +68,15 @@ const swiperData = buildSectionData();
 
 function createCard(card, sectionIndex, cardIndex) {
   const badgeHtml = card.guestFavorite ? '<span class="listing-badge">Guest favourite</span>' : "";
+  const isLcpCandidate = sectionIndex === 0 && cardIndex === 0;
+  const eagerAttrs = isLcpCandidate
+    ? `src="${card.image}" fetchpriority="high" loading="eager"`
+    : `src="${BLANK_IMG}" data-src="${card.image}" loading="lazy"`;
 
   return `
     <article class="listing-card" data-section-index="${sectionIndex}" data-card-index="${cardIndex}">
       <div class="listing-image-wrap">
-        <img src="${card.image}" alt="${card.title}" class="listing-image" loading="lazy">
+        <img ${eagerAttrs} alt="${card.title}" class="listing-image lazy-img" decoding="async">
         ${badgeHtml}
         <button class="like-btn" aria-label="Save ${card.title}">&#9825;</button>
       </div>
@@ -81,7 +89,7 @@ function createCard(card, sectionIndex, cardIndex) {
 function createSeeAllCard(section) {
   const previewImages = section.cards.slice(5, 8).map((card, idx) => {
     const classes = ["see-all-photo", `see-all-photo-${idx + 1}`].join(" ");
-    return `<img src="${card.image}" alt="" class="${classes}" loading="lazy" aria-hidden="true">`;
+    return `<img src="${BLANK_IMG}" data-src="${card.image}" alt="" class="${classes} lazy-img" loading="lazy" decoding="async" aria-hidden="true">`;
   }).join("");
 
   return `
@@ -158,8 +166,64 @@ function initSwipers() {
   const root = document.querySelector("#swiper-sections");
   if (!root) return;
 
-  root.innerHTML = swiperData.map(createSection).join("");
-  root.querySelectorAll(".listing-swiper").forEach(bindSwiper);
+  root.innerHTML = "";
+
+  const initialSections = 2;
+  let renderedCount = 0;
+
+  const sentinel = document.createElement("div");
+  sentinel.className = "swiper-sentinel";
+  root.appendChild(sentinel);
+
+  const renderNextSection = () => {
+    if (renderedCount >= swiperData.length) return;
+    const html = createSection(swiperData[renderedCount], renderedCount);
+    sentinel.insertAdjacentHTML("beforebegin", html);
+    const sectionEl = root.querySelector(`.listing-swiper[data-swiper-index="${renderedCount}"]`);
+    if (sectionEl) bindSwiper(sectionEl);
+    renderedCount += 1;
+    loadVisibleLazyImages();
+  };
+
+  for (let i = 0; i < initialSections; i += 1) renderNextSection();
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        renderNextSection();
+        if (renderedCount >= swiperData.length) sectionObserver.disconnect();
+      });
+    },
+    { rootMargin: "500px 0px" }
+  );
+
+  sectionObserver.observe(sentinel);
+}
+
+function loadVisibleLazyImages() {
+  const lazyImages = document.querySelectorAll("img.lazy-img[data-src]");
+  if (!lazyImages.length) return;
+
+  if (!lazyImageObserver) {
+    lazyImageObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target;
+          const src = img.getAttribute("data-src");
+          if (src) {
+            img.src = src;
+            img.removeAttribute("data-src");
+          }
+          observer.unobserve(img);
+        });
+      },
+      { rootMargin: "300px 0px" }
+    );
+  }
+
+  lazyImages.forEach((img) => lazyImageObserver.observe(img));
 }
 
 window.airbnbSwiperData = swiperData;

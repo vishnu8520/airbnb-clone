@@ -490,6 +490,11 @@
   margin-top: 36px;
 }
 
+.listing-swiper {
+  content-visibility: auto;
+  contain-intrinsic-size: 420px;
+}
+
 .swiper-head {
   display: flex;
   align-items: center;
@@ -707,6 +712,8 @@
 .site-footer {
   background: #f7f7f7;
   border-top: 1px solid #dddddd;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .footer-container {
