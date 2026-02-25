@@ -75,7 +75,7 @@ function createCard(card, sectionIndex, cardIndex) {
 
   return `
     <article class="listing-card" data-section-index="${sectionIndex}" data-card-index="${cardIndex}">
-      <div class="listing-image-wrap">
+      <div class="listing-image-wrap is-loading">
         <img ${eagerAttrs} alt="${card.title}" class="listing-image lazy-img" decoding="async">
         ${badgeHtml}
         <button class="like-btn" aria-label="Save ${card.title}">&#9825;</button>
@@ -166,39 +166,28 @@ function initSwipers() {
   const root = document.querySelector("#swiper-sections");
   if (!root) return;
 
-  root.innerHTML = "";
+  root.innerHTML = swiperData.map(createSection).join("");
+  root.querySelectorAll(".listing-swiper").forEach(bindSwiper);
+  hydrateImageSkeletons();
+  loadVisibleLazyImages();
+}
 
-  const initialSections = 2;
-  let renderedCount = 0;
+function markImageLoaded(img) {
+  if (!img) return;
+  img.classList.add("is-loaded");
+  const wrap = img.closest(".listing-image-wrap");
+  if (wrap) wrap.classList.remove("is-loading");
+}
 
-  const sentinel = document.createElement("div");
-  sentinel.className = "swiper-sentinel";
-  root.appendChild(sentinel);
-
-  const renderNextSection = () => {
-    if (renderedCount >= swiperData.length) return;
-    const html = createSection(swiperData[renderedCount], renderedCount);
-    sentinel.insertAdjacentHTML("beforebegin", html);
-    const sectionEl = root.querySelector(`.listing-swiper[data-swiper-index="${renderedCount}"]`);
-    if (sectionEl) bindSwiper(sectionEl);
-    renderedCount += 1;
-    loadVisibleLazyImages();
-  };
-
-  for (let i = 0; i < initialSections; i += 1) renderNextSection();
-
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        renderNextSection();
-        if (renderedCount >= swiperData.length) sectionObserver.disconnect();
-      });
-    },
-    { rootMargin: "500px 0px" }
-  );
-
-  sectionObserver.observe(sentinel);
+function hydrateImageSkeletons() {
+  const images = document.querySelectorAll("img.lazy-img");
+  images.forEach((img) => {
+    if (img.complete && img.currentSrc && !img.hasAttribute("data-src")) {
+      markImageLoaded(img);
+      return;
+    }
+    img.addEventListener("load", () => markImageLoaded(img), { once: true });
+  });
 }
 
 function loadVisibleLazyImages() {
