@@ -1,0 +1,92 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #f7f7f7;
+  z-index: 1000;
+  border-bottom: 1px solid #dcdcdc;
+  transition: background-color 0.25s ease;
+}
+
+.header-container {
+  max-width: 1820px;
+  margin: 0 auto;
+  padding: 18px 56px 38px;
+  transition: padding 0.25s ease;
+}
+
+.header-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  min-height: 68px;
+}
+
+.header-left .logo {
+  height: 50px;
+  width: auto;
+}
+
+.header-left .logo-small {
+  display: none;
+  height: 50px;
+  width: auto;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: flex-end;
+}
+
+.header-bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  max-height: 120px;
+  opacity: 1;
+  overflow: visible;
+  transition: max-height 0.25s ease, margin-top 0.25s ease, opacity 0.2s ease;
+}
+
+.header.collapsed .header-bottom {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.header.collapsed .nav-tabs {
+  display: none;
+}
+
+.header.collapsed .header-container {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.header.collapsed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+body.header-collapsed {
+  padding-top: 96px;
+}
+
+.homepage-main {
+  background: #f7f7f7;
+  min-height: 100vh;
+}

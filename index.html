@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Title -->
+  <title>Airbnb</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="mobile-search-row">
+        <div class="mobile-search-pill" aria-label="Start your search">
+          <span class="mobile-search-icon" aria-hidden="true"></span>
+          <input
+            type="text"
+            class="mobile-search-input"
+            placeholder="Start your search"
+            aria-label="Start your search"
+            autocomplete="off"
+          >
+          <div class="mobile-search-results" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="header-top">
+        <div class="header-left">
+          <img src="assets/icons/logo.svg" alt="Airbnb logo" class="logo">
+          <img src="assets/icons/logo-small.svg" alt="Airbnb logo" class="logo-small">
+        </div>
+
+        <div class="header-center">
+          <nav class="nav-tabs" aria-label="Main sections">
+            <button class="tab active">
+              <img src="assets/icons/home-icon.png" alt="" class="tab-icon" aria-hidden="true">
+              <span class="tab-text">Homes</span>
+            </button>
+            <button class="tab">
+              <img src="assets/icons/experience-icon.png" alt="" class="tab-icon" aria-hidden="true">
+              <span class="tab-text">Experiences</span>
+              <span class="new-badge-exp">NEW</span>
+            </button>
+            <button class="tab">
+              <img src="assets/icons/services-icon.png" alt="" class="tab-icon" aria-hidden="true">
+              <span class="tab-text">Services</span>
+              <span class="new-badge-svc">NEW</span>
+            </button>
+          </nav>
+
+          <div class="search-compact" aria-label="Compact search">
+            <img src="assets/icons/home-icon.png" alt="" class="compact-icon" aria-hidden="true">
+            <div class="compact-search-field">
+              <input
+                type="text"
+                class="compact-location-input"
+                placeholder="Anywhere"
+                aria-label="Search places or stays"
+                autocomplete="off"
+              >
+              <div class="compact-search-results" aria-live="polite"></div>
+            </div>
+            <span class="compact-divider"></span>
+            <span class="compact-item">Anytime</span>
+            <span class="compact-divider"></span>
+            <span class="compact-item">Add guests</span>
+            <button class="search-btn compact-search-btn" aria-label="Search">
+              <span class="search-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="host-btn">Become a host</button>
+          <button class="icon-btn" aria-label="Language">
+            <img src="assets/icons/globe-icon.svg" alt="" class="control-icon" aria-hidden="true">
+          </button>
+          <button class="icon-btn" aria-label="Menu">
+            <img src="assets/icons/menu-icon.svg" alt="" class="control-icon" aria-hidden="true">
+          </button>
+        </div>
+      </div>
+
+      <div class="header-bottom">
+        <div class="search-bar" aria-label="Main search">
+          <div class="search-item">
+            <span class="label">Where</span>
+            <div class="search-field">
+              <input
+                type="text"
+                class="where-search-input"
+                placeholder="Search destinations"
+                aria-label="Search destinations"
+                autocomplete="off"
+              >
+              <div class="where-search-results" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="search-item">
+            <span class="label">When</span>
+            <span class="value">Add dates</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="search-item">
+            <span class="label">Who</span>
+            <span class="value">Add guests</span>
+          </div>
+
+          <button class="search-btn" aria-label="Search">
+            <span class="search-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="homepage-main">
+    <div id="swiper-sections" class="swiper-sections"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <section class="footer-top">
+        <h2 class="footer-heading">Inspiration for future getaways</h2>
+        <nav class="footer-tabs" aria-label="Footer categories">
+          <button class="footer-tab active">Popular</button>
+          <button class="footer-tab">Arts &amp; culture</button>
+          <button class="footer-tab">Beach</button>
+          <button class="footer-tab">Mountains</button>
+          <button class="footer-tab">Outdoors</button>
+          <button class="footer-tab">Things to do</button>
+        </nav>
+
+        <div class="footer-popular-grid">
+          <a href="#" class="footer-destination"><span class="name">Dallas</span><span class="type">Flat rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Cleveland</span><span class="type">Villa rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">North Myrtle Beach</span><span class="type">Villa rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Nice</span><span class="type">Cabin rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Barcelona</span><span class="type">Flat rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Galveston</span><span class="type">Cabin rentals</span></a>
+
+          <a href="#" class="footer-destination"><span class="name">Philadelphia</span><span class="type">House rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Orange Beach</span><span class="type">Flat rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Gulf Shores</span><span class="type">Monthly Rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Tokyo</span><span class="type">Monthly Rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">London</span><span class="type">House rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">St. Petersburg</span><span class="type">Villa rentals</span></a>
+
+          <a href="#" class="footer-destination"><span class="name">Kauai</span><span class="type">Villa rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Amsterdam</span><span class="type">Flat rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Portland</span><span class="type">Apartment rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">Minneapolis</span><span class="type">Holiday rentals</span></a>
+          <a href="#" class="footer-destination"><span class="name">San Juan</span><span class="type">Flat rentals</span></a>
+          <button class="footer-show-more">Show more <span aria-hidden="true">&#709;</span></button>
+        </div>
+      </section>
+
+      <section class="footer-links">
+        <div class="footer-column">
+          <h3>Support</h3>
+          <a href="#">Help Centre</a>
+          <a href="#">Get help with a safety issue</a>
+          <a href="#">AirCover</a>
+          <a href="#">Anti-discrimination</a>
+          <a href="#">Disability support</a>
+          <a href="#">Cancellation options</a>
+          <a href="#">Report neighbourhood concern</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Hosting</h3>
+          <a href="#">Airbnb your home</a>
+          <a href="#">Airbnb your experience</a>
+          <a href="#">Airbnb your service</a>
+          <a href="#">AirCover for Hosts</a>
+          <a href="#">Hosting resources</a>
+          <a href="#">Community forum</a>
+          <a href="#">Hosting responsibly</a>
+          <a href="#">Join a free hosting class</a>
+          <a href="#">Find a co-host</a>
+          <a href="#">Refer a host</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Airbnb</h3>
+          <a href="#">2025 Summer Release</a>
+          <a href="#">Newsroom</a>
+          <a href="#">Careers</a>
+          <a href="#">Investors</a>
+          <a href="#">Airbnb.org emergency stays</a>
+        </div>
+      </section>
+
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <span>&copy; 2026 Airbnb, Inc.</span>
+          <span>&middot;</span>
+          <a href="#">Privacy</a>
+          <span>&middot;</span>
+          <a href="#">Terms</a>
+          <span>&middot;</span>
+          <a href="#">Company details</a>
+        </div>
+
+        <div class="footer-actions">
+          <button class="footer-action">
+            <span class="footer-action-icon" aria-hidden="true"><i class="fa-solid fa-globe"></i></span>
+            English (IN)
+          </button>
+          <button class="footer-action">&#8377; INR</button>
+          <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="js/main.js" defer></script>
+  <script src="js/swiper.js" defer></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/scroll.js" defer></script>
+</body>
+</html>
